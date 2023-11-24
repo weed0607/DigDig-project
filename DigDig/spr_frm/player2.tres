@@ -1,0 +1,65 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://cfwpc8wgcqecp"]
+
+[ext_resource type="Texture2D" uid="uid://b0fyl3dm6qywk" path="res://tex/player2.png" id="1_xoffy"]
+[ext_resource type="Texture2D" uid="uid://lmbvw0m00lty" path="res://tex/player2_digside.png" id="2_4vry2"]
+[ext_resource type="Texture2D" uid="uid://ddxbyj6w0pl83" path="res://tex/player2_dig.png" id="2_obyvc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ybwc"]
+atlas = ExtResource("1_xoffy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkbkw"]
+atlas = ExtResource("1_xoffy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fbob"]
+atlas = ExtResource("2_4vry2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dud7c"]
+atlas = ExtResource("2_4vry2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atv75"]
+atlas = ExtResource("2_obyvc")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clqk6"]
+atlas = ExtResource("2_obyvc")
+region = Rect2(32, 0, 32, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ybwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkbkw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fbob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dud7c")
+}],
+"loop": true,
+"name": &"dig_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atv75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clqk6")
+}],
+"loop": true,
+"name": &"digging",
+"speed": 2.0
+}]

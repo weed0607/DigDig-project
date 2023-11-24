@@ -1,0 +1,281 @@
+[gd_scene load_steps=18 format=3 uid="uid://clx1ndwrg1g1i"]
+
+[ext_resource type="Script" path="res://scr/init.gd" id="1_veuvb"]
+[ext_resource type="Texture2D" uid="uid://66tu0v74vqe5" path="res://tex/border1.png" id="2_4kp5t"]
+[ext_resource type="Texture2D" uid="uid://cftbiq7dl34pn" path="res://tex/border2.png" id="2_6ync3"]
+[ext_resource type="Script" path="res://scr/left_cam_pos.gd" id="2_d5fdj"]
+[ext_resource type="FontFile" uid="uid://cx7hbk1y335uv" path="res://font/upheavtt.ttf" id="2_g067l"]
+[ext_resource type="Texture2D" uid="uid://cu3o64wt0yum0" path="res://tex/sky.png" id="2_i578s"]
+[ext_resource type="Script" path="res://scr/right_cam_pos.gd" id="2_w5l42"]
+[ext_resource type="Script" path="res://scr/right_player.gd" id="3_qg12t"]
+[ext_resource type="SpriteFrames" uid="uid://cfwpc8wgcqecp" path="res://spr_frm/player2.tres" id="4_g8fyb"]
+[ext_resource type="SpriteFrames" uid="uid://bhqotq63r41ji" path="res://spr_frm/player1.tres" id="6_0qobo"]
+[ext_resource type="Script" path="res://scr/left_player.gd" id="6_v8hdd"]
+[ext_resource type="Script" path="res://scr/player_audio.gd" id="9_um3hc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a0i1o"]
+font = ExtResource("2_g067l")
+font_size = 52
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wpxol"]
+font = ExtResource("2_g067l")
+font_size = 36
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5t234"]
+font = ExtResource("2_g067l")
+font_size = 22
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wui60"]
+size = Vector2(32, 56)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wu67n"]
+lifetime_randomness = 0.02
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 130.77
+initial_velocity_max = 215.39
+angular_velocity_min = -10.58
+angular_velocity_max = 145.32
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[node name="Node2D" type="Node"]
+script = ExtResource("1_veuvb")
+metadata/_edit_horizontal_guides_ = []
+
+[node name="Border2" type="TextureRect" parent="."]
+visible = false
+z_index = 2
+offset_left = 514.0
+offset_top = 383.0
+offset_right = 547.0
+offset_bottom = 810.0
+rotation = 1.5708
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_6ync3")
+stretch_mode = 1
+
+[node name="Border1" type="TextureRect" parent="."]
+z_index = 2
+offset_left = 517.0
+offset_top = 385.0
+offset_right = 551.0
+offset_bottom = 910.0
+rotation = 1.5708
+texture = ExtResource("2_4kp5t")
+expand_mode = 1
+
+[node name="TopText" type="Label" parent="."]
+visible = false
+z_index = 2
+offset_top = 176.0
+offset_right = 512.0
+offset_bottom = 223.0
+text = "P1 WINS!"
+label_settings = SubResource("LabelSettings_a0i1o")
+horizontal_alignment = 1
+
+[node name="BottomText" type="Label" parent="."]
+visible = false
+z_index = 2
+offset_top = 568.0
+offset_right = 512.0
+offset_bottom = 615.0
+text = "P2 WINS!"
+label_settings = SubResource("LabelSettings_a0i1o")
+horizontal_alignment = 1
+
+[node name="UpScore" type="Label" parent="."]
+z_index = 3
+offset_left = 424.0
+offset_top = 363.0
+offset_right = 512.0
+offset_bottom = 400.0
+text = "999
+"
+label_settings = SubResource("LabelSettings_wpxol")
+
+[node name="DownScore" type="Label" parent="."]
+z_index = 3
+offset_left = 424.0
+offset_top = 403.0
+offset_right = 512.0
+offset_bottom = 440.0
+text = "999
+"
+label_settings = SubResource("LabelSettings_wpxol")
+
+[node name="EscTooltip" type="Label" parent="."]
+z_index = 3
+offset_left = 4.0
+offset_top = 374.0
+offset_right = 345.0
+offset_bottom = 402.0
+text = "Press ESC to Quit"
+label_settings = SubResource("LabelSettings_5t234")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_top = 400.0
+offset_right = 512.0
+offset_bottom = 1200.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(512, 800)
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+z_index = -5
+offset_left = -1544.0
+offset_top = -1280.0
+offset_right = 2112.0
+offset_bottom = 2080.0
+texture = ExtResource("2_i578s")
+
+[node name="LeftCam" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+rotation = 3.14159
+ignore_rotation = false
+script = ExtResource("2_d5fdj")
+
+[node name="RightPlayer" type="RigidBody2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(640, -900)
+lock_rotation = true
+script = ExtResource("3_qg12t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_wui60")
+
+[node name="RightSprite" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("6_0qobo")
+animation = &"digging"
+autoplay = "default"
+
+[node name="Sparks" type="GPUParticles2D" parent="SubViewportContainer/SubViewport/RightPlayer/RightSprite"]
+z_index = 2
+texture_filter = 1
+position = Vector2(0, 20)
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_wu67n")
+lifetime = 0.57
+explosiveness = 0.71
+visibility_rect = Rect2(-1, -1, 2, 2)
+
+[node name="FloorCast" type="RayCast2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+target_position = Vector2(0, 48)
+
+[node name="RightCastHigh" type="RayCast2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+position = Vector2(0, -16)
+rotation = -1.5708
+target_position = Vector2(-1.04907e-06, 24)
+
+[node name="RightCastLow" type="RayCast2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+position = Vector2(0, 16)
+rotation = -1.5708
+target_position = Vector2(-1.04907e-06, 24)
+
+[node name="LeftCastHigh" type="RayCast2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+position = Vector2(0, -16)
+rotation = 1.5708
+target_position = Vector2(1.04907e-06, 24)
+
+[node name="LeftCastLow" type="RayCast2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+position = Vector2(0, 16)
+rotation = 1.5708
+target_position = Vector2(1.04907e-06, 24)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport/RightPlayer"]
+scale = Vector2(2, 2)
+volume_db = -20.0
+script = ExtResource("9_um3hc")
+
+[node name="LeftPlayer" type="RigidBody2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(0, -900)
+lock_rotation = true
+script = ExtResource("6_v8hdd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_wui60")
+
+[node name="LeftSprite" type="AnimatedSprite2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("4_g8fyb")
+animation = &"dig_side"
+autoplay = "default"
+
+[node name="Sparks" type="GPUParticles2D" parent="SubViewportContainer/SubViewport/LeftPlayer/LeftSprite"]
+z_index = 2
+texture_filter = 1
+position = Vector2(0, 20)
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_wu67n")
+lifetime = 0.57
+explosiveness = 0.71
+visibility_rect = Rect2(-1, -1, 2, 2)
+
+[node name="FloorCast" type="RayCast2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+target_position = Vector2(0, 48)
+
+[node name="RightCastHigh" type="RayCast2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+position = Vector2(0, -16)
+rotation = -1.5708
+target_position = Vector2(-1.04907e-06, 24)
+
+[node name="RightCastLow" type="RayCast2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+position = Vector2(0, 16)
+rotation = -1.5708
+target_position = Vector2(-1.04907e-06, 24)
+
+[node name="LeftCastHigh" type="RayCast2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+position = Vector2(0, -16)
+rotation = 1.5708
+target_position = Vector2(1.04907e-06, 24)
+
+[node name="LeftCastLow" type="RayCast2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+position = Vector2(0, 16)
+rotation = 1.5708
+target_position = Vector2(1.04907e-06, 24)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport/LeftPlayer"]
+volume_db = -20.0
+script = ExtResource("9_um3hc")
+
+[node name="WorldAudio" type="AudioStreamPlayer2D" parent="SubViewportContainer/SubViewport"]
+volume_db = -15.0
+script = ExtResource("9_um3hc")
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+offset_top = -400.0
+offset_right = 512.0
+offset_bottom = 400.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(512, 800)
+render_target_update_mode = 4
+
+[node name="RightCam" type="Camera2D" parent="SubViewportContainer2/SubViewport"]
+script = ExtResource("2_w5l42")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+autoplay = true

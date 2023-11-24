@@ -1,0 +1,231 @@
+[gd_scene load_steps=20 format=3 uid="uid://caxpogilot8l1"]
+
+[ext_resource type="Shader" path="res://shdr/ControlsAlpha.gdshader" id="1_h72hf"]
+[ext_resource type="Texture2D" uid="uid://clnkhs1fnw1t8" path="res://tex/mainmenu.png" id="1_mytgd"]
+[ext_resource type="Texture2D" uid="uid://7qpnwx0a8r55" path="res://tex/keys/keys1.png" id="1_nahbq"]
+[ext_resource type="Texture2D" uid="uid://b68pqqkxxqguk" path="res://tex/bg.png" id="1_ugraa"]
+[ext_resource type="Script" path="res://scr/menu_scroll.gd" id="2_1u3hi"]
+[ext_resource type="Texture2D" uid="uid://c77x1k4pl407y" path="res://tex/digdig.png" id="2_mov4l"]
+[ext_resource type="FontFile" uid="uid://cx7hbk1y335uv" path="res://font/upheavtt.ttf" id="3_0wxg5"]
+[ext_resource type="Texture2D" uid="uid://xb71n5b6eem2" path="res://tex/keys/keys2.png" id="3_5kac0"]
+[ext_resource type="Script" path="res://scr/play_button.gd" id="4_fl55b"]
+[ext_resource type="Texture2D" uid="uid://b6f5wkrks3i4p" path="res://tex/keys/keys3.png" id="4_rvrfd"]
+[ext_resource type="Texture2D" uid="uid://bsiatlu4qic4a" path="res://tex/keys/keys4.png" id="5_rev81"]
+[ext_resource type="Texture2D" uid="uid://e4jrmih85eji" path="res://tex/keys/keys5.png" id="10_u33p5"]
+[ext_resource type="Texture2D" uid="uid://d3haosffqocy0" path="res://tex/keys/keys8.png" id="11_4xl67"]
+[ext_resource type="Texture2D" uid="uid://doicl5ibwe5jx" path="res://tex/keys/keys6.png" id="12_7477o"]
+[ext_resource type="Texture2D" uid="uid://ba67p0c5kmxe" path="res://tex/keys/keys7.png" id="13_vhpby"]
+[ext_resource type="AudioStream" uid="uid://d27c583efk3xv" path="res://sfx/funkymenu.mp3" id="16_2o5ef"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opn7y"]
+shader = ExtResource("1_h72hf")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ckv2"]
+font = ExtResource("3_0wxg5")
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_pvbps"]
+font = ExtResource("3_0wxg5")
+font_size = 128
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlsOverlay" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_opn7y")
+layout_mode = 0
+offset_top = 502.0
+offset_right = 513.0
+offset_bottom = 776.0
+texture = ExtResource("1_ugraa")
+
+[node name="P1Controls" type="Node2D" parent="."]
+position = Vector2(286, 643)
+
+[node name="W" type="TextureRect" parent="P1Controls"]
+texture_filter = 1
+offset_left = -200.0
+offset_top = -68.0
+offset_right = -160.0
+offset_bottom = -28.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("1_nahbq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="P1Controls/W"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -23.0
+offset_right = 50.0
+offset_bottom = 3.0
+text = "Jump"
+label_settings = SubResource("LabelSettings_2ckv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="A" type="TextureRect" parent="P1Controls"]
+texture_filter = 1
+offset_left = -266.0
+offset_right = -226.0
+offset_bottom = 40.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("3_5kac0")
+metadata/_edit_use_anchors_ = true
+
+[node name="S" type="TextureRect" parent="P1Controls"]
+texture_filter = 1
+offset_left = -200.0
+offset_right = -160.0
+offset_bottom = 40.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("4_rvrfd")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="P1Controls/S"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = 39.0
+offset_right = 97.0
+offset_bottom = 75.0
+text = "dig
+(while in air)"
+label_settings = SubResource("LabelSettings_2ckv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="D" type="TextureRect" parent="P1Controls"]
+texture_filter = 1
+offset_left = -135.0
+offset_right = -95.0
+offset_bottom = 40.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("5_rev81")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 2016.0
+offset_bottom = 2016.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_mytgd")
+expand_mode = 4
+script = ExtResource("2_1u3hi")
+
+[node name="DigDig" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 264.0
+texture = ExtResource("2_mov4l")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 352.0
+offset_right = 440.0
+offset_bottom = 456.0
+flat = true
+script = ExtResource("4_fl55b")
+
+[node name="Play" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.513609
+anchor_top = 0.494077
+anchor_right = 0.513609
+anchor_bottom = 0.494077
+offset_left = -157.008
+offset_top = -59.384
+offset_right = 156.992
+offset_bottom = 59.616
+text = "PLAY"
+label_settings = SubResource("LabelSettings_pvbps")
+metadata/_edit_use_anchors_ = true
+
+[node name="P2Controls" type="Node2D" parent="."]
+position = Vector2(564, 643)
+
+[node name="W" type="TextureRect" parent="P2Controls"]
+texture_filter = 1
+offset_left = -200.0
+offset_top = -68.0
+offset_right = -160.0
+offset_bottom = -28.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("10_u33p5")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="P2Controls/W"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.3
+anchor_top = -0.575
+anchor_right = 1.225
+anchor_bottom = 0.25
+offset_left = -5.0
+offset_top = -23.0
+offset_right = 50.0
+offset_bottom = 3.0
+text = "(while in air)
+dig"
+label_settings = SubResource("LabelSettings_2ckv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="A" type="TextureRect" parent="P2Controls"]
+texture_filter = 1
+offset_left = -266.0
+offset_right = -226.0
+offset_bottom = 40.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("11_4xl67")
+metadata/_edit_use_anchors_ = true
+
+[node name="S" type="TextureRect" parent="P2Controls"]
+texture_filter = 1
+offset_left = -200.0
+offset_right = -160.0
+offset_bottom = 40.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("12_7477o")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="P2Controls/S"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.225
+anchor_bottom = -0.225
+offset_left = -52.0
+offset_top = 39.0
+offset_right = 97.0
+offset_bottom = 75.0
+text = "jump"
+label_settings = SubResource("LabelSettings_2ckv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="D" type="TextureRect" parent="P2Controls"]
+texture_filter = 1
+offset_left = -135.0
+offset_right = -95.0
+offset_bottom = 40.0
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("13_vhpby")
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_2o5ef")
+autoplay = true
